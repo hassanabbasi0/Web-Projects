@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brew Haven | Coffee & Comfort</title>
+  <!-- Font Awesome 6 (free icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ----- RESET & VARIABLES ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #fefbf7;  /* soft cream background */
+      color: #2e2e2e;              /* soft black for text */
+      line-height: 1.5;
+    }
+
+    :root {
+      --coffee-brown: #6f4e37;      /* rich coffee */
+      --coffee-light: #8b6b4d;      /* lighter brown */
+      --cream: #faf3e0;              /* creamy white */
+      --beige: #f8f0e3;               /* warm beige */
+      --soft-black: #2e2e2e;
+      --shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      --transition: all 0.3s ease;
+    }
+
+    /* ----- TYPOGRAPHY & LINKS ----- */
+    h1, h2, h3 {
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+      color: var(--soft-black);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ----- CONTAINER / SECTION SPACING ----- */
+    section {
+      padding: 5rem 1.5rem;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* ----- BUTTONS ----- */
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      border-radius: 40px;
+      font-weight: 500;
+      transition: var(--transition);
+      cursor: pointer;
+      border: 2px solid transparent;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background-color: var(--coffee-brown);
+      color: var(--cream);
+      border-color: var(--coffee-brown);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--coffee-light);
+      border-color: var(--coffee-light);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(111, 78, 55, 0.2);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--coffee-brown);
+      border-color: var(--coffee-brown);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--coffee-brown);
+      color: var(--cream);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(111, 78, 55, 0.15);
+    }
+
+    /* ----- STICKY HEADER ----- */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: rgba(250, 243, 224, 0.95); /* cream with slight transparency */
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--coffee-brown);
+      letter-spacing: -0.5px;
+    }
+
+    .logo i {
+      margin-right: 8px;
+      color: var(--coffee-light);
+    }
+
+    .nav ul {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      font-weight: 500;
+      position: relative;
+      padding-bottom: 4px;
+      color: var(--soft-black);
+      transition: var(--transition);
+    }
+
+    .nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background-color: var(--coffee-brown);
+      transition: width 0.3s;
+    }
+
+    .nav a:hover {
+      color: var(--coffee-brown);
+    }
+
+    .nav a:hover::after {
+      width: 100%;
+    }
+
+    /* ----- HERO SECTION ----- */
+    .hero {
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(rgba(46, 46, 46, 0.6), rgba(46, 46, 46, 0.5)), 
+                  url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+      background-attachment: fixed; /* subtle parallax effect */
+      color: white;
+      padding: 4rem 1.5rem;
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .hero h1 {
+      font-size: 3.2rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2.5rem;
+      opacity: 0.95;
+      font-weight: 300;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .hero-buttons .btn {
+      min-width: 160px;
+    }
+
+    /* ----- FEATURES SECTION ----- */
+    .features {
+      background-color: var(--beige);
+      border-radius: 0 0 50px 50px;
+    }
+
+    .features h2 {
+      text-align: center;
+      color: var(--coffee-brown);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2.5rem;
+      margin-top: 2rem;
+    }
+
+    .feature-item {
+      background: white;
+      padding: 2.5rem 1.8rem;
+      border-radius: 24px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border: 1px solid rgba(111, 78, 55, 0.05);
+    }
+
+    .feature-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 30px rgba(111, 78, 55, 0.1);
+      border-color: var(--coffee-light);
+    }
+
+    .feature-item i {
+      font-size: 3rem;
+      color: var(--coffee-brown);
+      margin-bottom: 1.2rem;
+    }
+
+    .feature-item h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .feature-item p {
+      color: #555;
+    }
+
+    /* ----- ABOUT SECTION ----- */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-text p {
+      margin: 1.5rem 0;
+      font-size: 1.1rem;
+      color: #444;
+    }
+
+    .about-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      transition: transform 0.4s;
+    }
+
+    .about-image img:hover {
+      transform: scale(1.02);
+    }
+
+    /* ----- MENU PREVIEW ----- */
+    .menu-preview {
+      background-color: var(--cream);
+      border-radius: 50px 50px 0 0;
+      text-align: center;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .menu-item {
+      background: white;
+      padding: 2rem 1rem;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border: 1px solid rgba(0,0,0,0.02);
+    }
+
+    .menu-item:hover {
+      transform: scale(1.02);
+      box-shadow: 0 12px 24px rgba(111, 78, 55, 0.1);
+    }
+
+    .menu-item h3 {
+      font-size: 1.8rem;
+      color: var(--coffee-brown);
+      margin-bottom: 0.5rem;
+    }
+
+    .menu-item p {
+      color: #666;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      padding: 0 0.5rem;
+    }
+
+    .menu-item .price {
+      display: inline-block;
+      background-color: var(--beige);
+      padding: 0.4rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      color: var(--coffee-brown);
+      font-size: 1.2rem;
+    }
+
+    /* ----- CALL TO ACTION ----- */
+    .cta {
+      background-color: var(--coffee-brown);
+      color: var(--cream);
+      text-align: center;
+      border-radius: 80px 80px 0 0;
+      margin-top: -2rem; /* slight overlap */
+    }
+
+    .cta h2 {
+      color: var(--cream);
+      font-size: 2.5rem;
+    }
+
+    .cta .btn {
+      background-color: var(--cream);
+      color: var(--coffee-brown);
+      border: none;
+      font-weight: 600;
+      margin-top: 1.5rem;
+    }
+
+    .cta .btn:hover {
+      background-color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+    }
+
+    /* ----- FOOTER ----- */
+    .footer {
+      background-color: #2e2e2e;
+      color: #ddd;
+      padding: 3rem 1.5rem 1rem;
+      font-size: 0.95rem;
+    }
+
+    .footer-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .footer-info h3 {
+      color: var(--cream);
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-info p {
+      margin: 0.7rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .footer-info i {
+      color: var(--coffee-light);
+      width: 20px;
+    }
+
+    .footer-social h4 {
+      color: var(--cream);
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+
+    .footer-social a {
+      display: inline-block;
+      margin-right: 1.5rem;
+      font-size: 1.8rem;
+      color: #bbb;
+      transition: var(--transition);
+    }
+
+    .footer-social a:hover {
+      color: var(--coffee-light);
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid #444;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    /* ----- RESPONSIVE DESIGN ----- */
+    @media (max-width: 900px) {
+      h2 { font-size: 2rem; }
+      .hero h1 { font-size: 2.6rem; }
+      .about { grid-template-columns: 1fr; gap: 2rem; }
+      .about-image { order: -1; } /* image on top for mobile */
+    }
+
+    @media (max-width: 600px) {
+      .header {
+        flex-direction: column;
+        padding: 1rem;
+      }
+      .nav ul {
+        justify-content: center;
+        gap: 1.2rem;
+      }
+      .hero h1 { font-size: 2.2rem; }
+      .hero p { font-size: 1rem; }
+      .hero-buttons .btn { min-width: 140px; }
+      section { padding: 3rem 1rem; }
+      .feature-grid { gap: 1.5rem; }
+      .menu-grid { gap: 1.2rem; }
+      .cta h2 { font-size: 2rem; }
+    }
+
+    @media (max-width: 400px) {
+      .hero-buttons { flex-direction: column; align-items: center; width: 100%; }
+      .hero-buttons .btn { width: 100%; }
+    }
+
+    /* helper to offset sticky header for section anchors */
+    #home, #about, #menu, #contact {
+      scroll-margin-top: 90px;
+    }
+  </style>
+</head>
+<body>
+  <!-- STICKY HEADER -->
+  <header class="header">
+    <div class="logo">
+      <i class="fas fa-mug-hot"></i> Brew Haven
+    </div>
+    <nav class="nav">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>Fresh Coffee. Perfect Moments.</h1>
+      <p>Enjoy handcrafted coffee made from premium roasted beans in a cozy environment designed for comfort and conversation.</p>
+      <div class="hero-buttons">
+        <a href="#menu" class="btn btn-primary">View Menu</a>
+        <a href="#" class="btn btn-secondary">Order Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES SECTION -->
+  <section class="features">
+    <h2>Our promise to you</h2>
+    <div class="feature-grid">
+      <div class="feature-item">
+        <i class="fas fa-mug-hot"></i>
+        <h3>Premium Coffee Beans</h3>
+        <p>Freshly roasted beans sourced from the best coffee farms worldwide.</p>
+      </div>
+      <div class="feature-item">
+        <i class="fas fa-couch"></i>
+        <h3>Cozy Atmosphere</h3>
+        <p>A relaxing environment perfect for studying, working, or meeting friends.</p>
+      </div>
+      <div class="feature-item">
+        <i class="fas fa-smile"></i>
+        <h3>Fast & Friendly Service</h3>
+        <p>Professional baristas delivering your coffee quickly with great customer care.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section id="about" class="about">
+    <div class="about-text">
+      <h2>About Brew Haven</h2>
+      <p>Brew Haven is a community coffee shop built for people who love quality coffee and meaningful conversations. Our mission is to create a comfortable place where everyone can relax, work, or connect while enjoying exceptional coffee.</p>
+      <p>We believe that a great cup of coffee can spark ideas, friendships, and comfort. Every bean is carefully selected, roasted with passion, and brewed with care.</p>
+    </div>
+    <div class="about-image">
+      <img src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Cozy café interior with wooden tables and warm lighting">
+    </div>
+  </section>
+
+  <!-- MENU PREVIEW -->
+  <section id="menu" class="menu-preview">
+    <h2>Popular drinks</h2>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <h3>Espresso</h3>
+        <p>Strong, rich and pure — a single shot of perfection.</p>
+        <span class="price">$2.50</span>
+      </div>
+      <div class="menu-item">
+        <h3>Cappuccino</h3>
+        <p>Espresso with velvety foam and a dusting of cocoa.</p>
+        <span class="price">$3.75</span>
+      </div>
+      <div class="menu-item">
+        <h3>Latte</h3>
+        <p>Smooth espresso blended with steamed milk.</p>
+        <span class="price">$4.00</span>
+      </div>
+      <div class="menu-item">
+        <h3>Caramel Macchiato</h3>
+        <p>Rich vanilla and caramel drizzle over fresh espresso.</p>
+        <span class="price">$4.50</span>
+      </div>
+    </div>
+    <!-- subtle extra link (not necessary but nice) -->
+    <a href="#" class="btn btn-secondary" style="margin-top: 1rem;">Full menu &rarr;</a>
+  </section>
+
+  <!-- CALL TO ACTION -->
+  <section class="cta">
+    <h2>Start Your Day with the Perfect Cup.</h2>
+    <a href="#" class="btn btn-primary">Order Your Coffee</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact" class="footer">
+    <div class="footer-content">
+      <div class="footer-info">
+        <h3>Brew Haven</h3>
+        <p><i class="fas fa-map-marker-alt"></i> 123 Coffee Lane, Bean City</p>
+        <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+        <p><i class="fas fa-envelope"></i> hello@brewhaven.com</p>
+      </div>
+      <div class="footer-social">
+        <h4>Follow the brew</h4>
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Brew Haven Coffee Shop. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- small optional javascript for extra smoothness (just a placeholder) -->
+  <script>
+    // (optional) any subtle animation can go here – we already have CSS
+    // For example, console.log welcomes you
+    console.log('Welcome to Brew Haven ☕');
+  </script>
+</body>
+</html>
